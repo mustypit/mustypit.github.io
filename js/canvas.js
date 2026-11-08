@@ -106,7 +106,7 @@
   }
 
   // ---------- Stamps ----------
-  var stamps = [], penOn = false, shape = 'star', color = 'black';
+  var stamps = [], penOn = false, shape = 'sparkle', color = 'black';
   var NS = 'http://www.w3.org/2000/svg';
   function drawStamp(k, fresh) {
     var g = document.createElementNS(NS, 'g');
@@ -165,7 +165,7 @@
         if (t.off.x || t.off.y) t.el.style.transform = 'translate(' + t.off.x + 'px,' + t.off.y + 'px)';
       });
       stamps = d.stamps || [];
-      shape = d.shape || 'star'; color = d.color || 'black'; penOn = !!d.pen;
+      shape = 'sparkle'; color = d.color || 'black'; penOn = !!d.pen;
       redrawStamps();
       apply(d.v);
       return true;
@@ -305,9 +305,8 @@
   $('seeAll').onclick = function () { var s = size(); centerOn(clamp(Math.min(s.w / W, s.h / H) * 0.95), true); };
   $('center').onclick = function () { centerOn(1, true); };
   $('stamp').onclick = function () {
-    if (!penOn) { penOn = true; shape = 'star'; }
-    else if (SHAPE_ORDER.indexOf(shape) < SHAPE_ORDER.length - 1) { shape = SHAPE_ORDER[SHAPE_ORDER.indexOf(shape) + 1]; }
-    else { penOn = false; shape = 'star'; }
+    penOn = !penOn;
+    shape = 'sparkle';
     updateTools(); save();
   };
   $('color').onclick = function () {
