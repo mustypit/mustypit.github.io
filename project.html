@@ -18,20 +18,6 @@
   </a>
 </header>
 
-<section class="viewer" aria-roledescription="carousel" aria-label="Project images">
-  <div class="stage" id="stage">
-    <button type="button" class="zone prev" id="zPrev" aria-label="Previous image"></button>
-    <button type="button" class="zone next" id="zNext" aria-label="Next image"></button>
-  </div>
-  <div class="v-bar">
-    <span class="v-count" id="count" aria-live="polite"></span>
-    <span class="v-btns">
-      <button type="button" class="t" id="bPrev">Previous</button>
-      <button type="button" class="t" id="bNext">Next</button>
-    </span>
-  </div>
-</section>
-
 <section class="p-intro">
   <div class="left">
     <span class="p-num" id="num"></span>
@@ -47,6 +33,22 @@
     </dl>
   </div>
 </section>
+
+<section class="viewer" aria-roledescription="carousel" aria-label="Project images">
+  <div class="stage" id="stage">
+    <button type="button" class="zone prev" id="zPrev" aria-label="Previous image"></button>
+    <button type="button" class="zone next" id="zNext" aria-label="Next image"></button>
+  </div>
+  <div class="v-bar">
+    <span class="v-count" id="count" aria-live="polite"></span>
+    <span class="v-btns">
+      <button type="button" class="t" id="bPrev">Previous</button>
+      <button type="button" class="t" id="bNext">Next</button>
+    </span>
+  </div>
+</section>
+
+
 
 <nav class="p-nav" aria-label="Project navigation">
   <a id="prev" href="index.html"></a>
@@ -101,7 +103,9 @@
     var two = function (x) { return String(x).padStart(2, '0'); };
     document.getElementById('count').textContent = two(cur + 1) + ' / ' + two(els.length);
     var single = els.length < 2;
-    ['zPrev', 'zNext', 'bPrev', 'bNext'].forEach(function (id) { document.getElementById(id).hidden = single; });
+    var isVideo = slides[cur].type === 'video';
+    ['bPrev', 'bNext'].forEach(function (id) { document.getElementById(id).hidden = single; });
+    ['zPrev', 'zNext'].forEach(function (id) { document.getElementById(id).hidden = single || isVideo; });
   }
   document.getElementById('zPrev').onclick = document.getElementById('bPrev').onclick = function () { show(cur - 1); };
   document.getElementById('zNext').onclick = document.getElementById('bNext').onclick = function () { show(cur + 1); };
