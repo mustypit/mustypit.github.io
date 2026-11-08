@@ -8,7 +8,7 @@
   var COLORS = { black: '#111111', red: '#D7263D', blue: '#1F4FD6', yellow: '#F2B705', white: '#FFFFFF' };
   var COLOR_ORDER = ['black', 'red', 'blue', 'yellow', 'white'];
   var SHAPE_ORDER = ['star', 'sparkle', 'shine'];
-  var W = 5000, H = 3600, MIN = 0.0005, MAX = 2.5;
+  var W = 5000, H = 3600, MIN = 0.0005, MAX = 2000;
   var STORE = 'portfolio-canvas-v1';
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
