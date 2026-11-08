@@ -200,25 +200,23 @@ img.slide { width: auto; height: auto; object-fit: contain; user-select: none; -
 }
 
 /* ---------- Bio page ---------- */
-.bio { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; padding: 96px 48px 120px; align-items: start; }
-.bio-left { grid-column: 1 / span 5; display: flex; flex-direction: column; gap: 24px; }
+/* Split at the centre: portrait ends at the centre line, text starts there */
+.bio { display: grid; grid-template-columns: 1fr 1fr; column-gap: 40px; padding: 96px 48px 120px; align-items: start; }
+.bio-left { display: flex; justify-content: flex-end; }
 .bio-portrait { width: 220px; max-width: 100%; height: auto; display: block; }
-.bio-right { grid-column: 4 / span 7; display: flex; flex-direction: column; gap: 48px; }
-.bio-head { display: flex; flex-direction: row; align-items: flex-end; gap: 28px; }
-.bio-id { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
-.bio-head #left:empty { display: none; }
+.bio-right { display: flex; flex-direction: column; gap: 48px; max-width: 580px; }
+.bio-id { display: flex; flex-direction: column; gap: 8px; }
 .bio-name { margin: 0; font-size: 56px; line-height: 1.05; font-weight: 500; letter-spacing: -.02em; }
 .bio-tag { font-size: 13px; color: var(--muted); }
 .bio-text p { margin: 0 0 1em; font-size: 19px; line-height: 1.6; }
-.bio-lists { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 32px 24px; }
+.bio-lists { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 32px 24px; }
 .bio-lists h2 { margin: 0 0 12px; font-size: 12px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
 .bio-lists ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; font-size: 15px; }
 .bio-contact { display: flex; flex-wrap: wrap; gap: 8px 28px; font-size: 15px; }
 .bio-contact a { text-underline-offset: 4px; }
 @media (max-width: 760px) {
-  .bio { grid-template-columns: 1fr; row-gap: 48px; padding: 48px 20px 80px; }
-  .bio-left, .bio-right { grid-column: 1 / -1; }
+  .bio { grid-template-columns: 1fr; row-gap: 32px; padding: 48px 20px 80px; }
+  .bio-left { justify-content: flex-start; }
+  .bio-portrait { width: 140px; }
   .bio-name { font-size: 40px; }
-  .bio-head { gap: 16px; }
-  .bio-portrait { width: 120px; }
 }
