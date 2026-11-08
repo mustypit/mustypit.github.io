@@ -113,8 +113,7 @@
     g.setAttribute('transform', 'translate(' + k.x + ' ' + k.y + ') rotate(' + k.r + ') scale(' + k.k + ')');
     var p = document.createElementNS(NS, 'path');
     p.setAttribute('d', SHAPES[k.s] || SHAPES.star);
-    p.setAttribute('fill', COLORS[k.c] || COLORS.black);
-    if (k.c === 'white') { p.setAttribute('stroke', '#9A9A9A'); p.setAttribute('stroke-width', '0.04'); }
+    p.setAttribute('fill', k.hex || COLORS[k.c] || COLORS.black);
     if (fresh) p.setAttribute('class', 'stamp');
     g.appendChild(p);
     ink.appendChild(g);
@@ -125,18 +124,41 @@
     $('stampIcon').setAttribute('d', icon);
     $('stampIcon').setAttribute('fill', penOn ? '#111111' : 'none');
     $('stamp').setAttribute('aria-pressed', penOn ? 'true' : 'false');
-    $('color').hidden = !penOn;
-    $('colorDot').style.background = COLORS[color];
-    $('color').title = 'Color: ' + color;
     $('clear').hidden = stamps.length === 0;
     vp.classList.toggle('pen-on', penOn);
-    var cur = penOn ? 'url(cursors/' + shape + '-' + color + '.svg) 22 22, crosshair' : '';
+    var cur = penOn ? 'url(cursors/' + shape + '-black.svg) 22 22, crosshair' : '';
     vp.style.cursor = cur;
     tiles.forEach(function (t) {
       t.el.style.cursor = cur;
       t.cap.style.cursor = cur;
       t.ph.querySelectorAll('.grip').forEach(function (g) { g.style.cursor = cur; });
     });
+  }
+
+  // Stamp color comes from the photo under the click (black on empty canvas)
+  var sampler = document.createElement('canvas');
+  sampler.width = sampler.height = 9;
+  var sctx = sampler.getContext('2d', { willReadFrequently: true });
+  function sampleColor(e) {
+    var ph = e.target.closest && e.target.closest('.tile .ph');
+    var img = ph && ph.querySelector('img');
+    if (!img || !img.naturalWidth) return '#111111';
+    try {
+      var r = img.getBoundingClientRect();
+      var fx = (e.clientX - r.left) / r.width, fy = (e.clientY - r.top) / r.height;
+      var sw = img.naturalWidth * 0.04, sh = img.naturalHeight * 0.04;
+      sctx.clearRect(0, 0, 9, 9);
+      sctx.drawImage(img, Math.max(0, fx * img.naturalWidth - sw / 2), Math.max(0, fy * img.naturalHeight - sh / 2), sw, sh, 0, 0, 9, 9);
+      var d = sctx.getImageData(0, 0, 9, 9).data, R = 0, G = 0, B = 0, n = 0;
+      for (var i = 0; i < d.length; i += 4) { R += d[i]; G += d[i + 1]; B += d[i + 2]; n++; }
+      R /= n; G /= n; B /= n;
+      var avg = (R + G + B) / 3;
+      var sat = function (c) { return Math.max(0, Math.min(255, avg + (c - avg) * 1.8)); };
+      R = sat(R); G = sat(G); B = sat(B);
+      var lum = (0.299 * R + 0.587 * G + 0.114 * B) / 255;
+      var adj = function (c) { return Math.round(lum > 0.5 ? c * 0.42 : c + (255 - c) * 0.65); };
+      return 'rgb(' + adj(R) + ',' + adj(G) + ',' + adj(B) + ')';
+    } catch (err) { return '#111111'; }
   }
 
   // ---------- Saving (so "back" from a project restores the canvas) ----------
@@ -284,7 +306,7 @@
     if (penOn) {
       e.preventDefault(); e.stopPropagation();
       var p = toWorld(e.clientX, e.clientY);
-      var k = { x: Math.round(p.x), y: Math.round(p.y), s: shape, c: color, r: Math.round(Math.random() * 30 - 15), k: Math.round(20 / v.s * 10) / 10 };
+      var k = { x: Math.round(p.x), y: Math.round(p.y), s: shape, hex: sampleColor(e), r: Math.round(Math.random() * 30 - 15), k: Math.round(20 / v.s * 10) / 10 };
       stamps.push(k); drawStamp(k, true); updateTools(); save();
       return;
     }
@@ -307,10 +329,6 @@
   $('stamp').onclick = function () {
     penOn = !penOn;
     shape = 'sparkle';
-    updateTools(); save();
-  };
-  $('color').onclick = function () {
-    color = COLOR_ORDER[(COLOR_ORDER.indexOf(color) + 1) % COLOR_ORDER.length];
     updateTools(); save();
   };
   function clearStamps(fade) {
