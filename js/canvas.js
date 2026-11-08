@@ -8,7 +8,7 @@
   var COLORS = { black: '#111111', red: '#D7263D', blue: '#1F4FD6', yellow: '#F2B705', white: '#FFFFFF' };
   var COLOR_ORDER = ['black', 'red', 'blue', 'yellow', 'white'];
   var SHAPE_ORDER = ['star', 'sparkle', 'shine'];
-  var W = 5000, H = 3600, MIN = 0.15, MAX = 2.5;
+  var W = 5000, H = 3600, MIN = 0.0005, MAX = 2.5;
   var STORE = 'portfolio-canvas-v1';
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -63,7 +63,7 @@
   function apply(nv) {
     v = nv;
     world.style.transform = 'translate(' + v.tx + 'px,' + v.ty + 'px) scale(' + v.s + ')';
-    $('zoomLabel').textContent = Math.round(v.s * 100) + '%';
+    $('zoomLabel').textContent = (v.s >= 0.1 ? Math.round(v.s * 100) : v.s >= 0.01 ? (v.s * 100).toFixed(1) : (v.s * 100).toFixed(2)) + '%';
     save();
   }
   function stopAnim() { if (raf) cancelAnimationFrame(raf); raf = null; }
