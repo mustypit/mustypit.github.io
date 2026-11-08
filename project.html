@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Project</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="project-page">
+<header class="p-header">
+  <a href="index.html" class="p-name" data-site="name"></a>
+  <a href="index.html">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg>
+    All work
+  </a>
+</header>
+
+<section class="p-intro">
+  <div class="left">
+    <span class="p-num" id="num"></span>
+    <h1 class="p-title" id="title"></h1>
+  </div>
+  <div class="right">
+    <p class="p-text" id="text"></p>
+    <dl class="p-meta">
+      <div><dt>Year</dt><dd id="year"></dd></div>
+      <div><dt>Location</dt><dd id="location"></dd></div>
+      <div><dt>Client</dt><dd id="client"></dd></div>
+      <div><dt>Camera</dt><dd id="camera"></dd></div>
+    </dl>
+  </div>
+</section>
+
+<main class="p-body" id="body"></main>
+
+<nav class="p-nav" aria-label="Project navigation">
+  <a id="prev" href="index.html"></a>
+  <a id="next" href="index.html"></a>
+</nav>
+
+<script src="content.js"></script>
+<script>
+(function () {
+  var SITE = window.SITE || { projects: {} };
+  document.querySelectorAll('[data-site]').forEach(function (el) { el.textContent = SITE[el.getAttribute('data-site')] || ''; });
+  var ids = Object.keys(SITE.projects || {});
+  var id = new URLSearchParams(location.search).get('p');
+  if (ids.indexOf(id) < 0) id = ids[0];
+  var p = (SITE.projects || {})[id] || {};
+  var i = ids.indexOf(id);
+  document.title = (p.title || 'Project') + (SITE.name ? ' · ' + SITE.name : '');
+  var set = function (k, v) { var el = document.getElementById(k); if (el) el.textContent = v || ''; };
+  set('num', String(i + 1).padStart(2, '0'));
+  ['title', 'text', 'year', 'location', 'client', 'camera'].forEach(function (k) { set(k, p[k]); });
+
+  var body = document.getElementById('body');
+  var img = function (src) { var im = document.createElement('img'); im.src = src; im.alt = p.title || ''; im.loading = 'lazy'; return im; };
+  var imgs = (p.images || []).slice();
+  if (imgs.length) body.appendChild(img(imgs.shift()));
+  if (imgs.length >= 2) {
+    var pair = document.createElement('div'); pair.className = 'p-pair';
+    pair.appendChild(img(imgs.shift())); pair.appendChild(img(imgs.shift()));
+    body.appendChild(pair);
+  }
+  if (p.video) {
+    var vid = document.createElement('div'); vid.className = 'p-video';
+    var f = document.createElement('iframe'); f.src = p.video; f.allow = 'autoplay; fullscreen; picture-in-picture'; f.allowFullscreen = true; f.title = p.title || 'Video';
+    vid.appendChild(f); body.appendChild(vid);
+  }
+  imgs.forEach(function (s) { body.appendChild(img(s)); });
+
+  if (ids.length > 1) {
+    var prev = ids[(i - 1 + ids.length) % ids.length], next = ids[(i + 1) % ids.length];
+    var pa = document.getElementById('prev'), na = document.getElementById('next');
+    pa.href = 'project.html?p=' + encodeURIComponent(prev);
+    pa.textContent = '← Previous: ' + (SITE.projects[prev].title || '');
+    na.href = 'project.html?p=' + encodeURIComponent(next);
+    na.textContent = 'Next: ' + (SITE.projects[next].title || '') + ' →';
+  }
+})();
+</script>
+</body>
+</html>
