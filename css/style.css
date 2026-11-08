@@ -202,7 +202,7 @@ img.slide { width: auto; height: auto; object-fit: contain; user-select: none; -
 /* ---------- Bio page ---------- */
 .bio { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; padding: 96px 48px 120px; align-items: start; }
 .bio-left { grid-column: 1 / span 5; display: flex; flex-direction: column; gap: 24px; }
-.bio-portrait { width: 100%; height: auto; display: block; }
+.bio-portrait { width: 220px; max-width: 100%; height: auto; display: block; }
 .bio-right { grid-column: 7 / span 6; display: flex; flex-direction: column; gap: 48px; }
 .bio-name { margin: 0; font-size: 56px; line-height: 1.05; font-weight: 500; letter-spacing: -.02em; }
 .bio-tag { font-size: 13px; color: var(--muted); }
