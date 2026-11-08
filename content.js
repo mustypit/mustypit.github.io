@@ -3,6 +3,7 @@
    ============================================================
    • name / tagline / email / instagram: shown on the site
      (email and instagram appear as icons in the top-right corner).
+   • bio: the text, lists and portrait on your bio page.
    • photos: every picture on the canvas.
        image   → the file in the "images" folder (about 1200–1600px,
                  loads first so the page is fast)
@@ -27,6 +28,20 @@ window.SITE = {
   tagline: "Photography & film",
   email: "you@example.com",
   instagram: "",   // optional, e.g. "https://instagram.com/yourname" — shows an icon when filled in
+
+  // Bio page (opens when someone clicks your name)
+  bio: {
+    portrait: "images/04.jpg",   // optional: a photo of you, or "" for none
+    text: [
+      "[A few sentences about you: what you photograph, where you are based, and what draws you to it.]",
+      "[A second paragraph: your background, how you work, or what you are working on now.]"
+    ],
+    lists: [
+      { title: "Selected clients", items: ["[Client name]", "[Client name]", "[Client name]"] },
+      { title: "Exhibitions", items: ["[2025 · Exhibition, City]", "[2024 · Exhibition, City]"] },
+      { title: "Publications", items: ["[Magazine, Year]", "[Book, Year]"] }
+    ]
+  },
 
   photos: [
     { image: "images/01.jpg", large: "images/large/01.jpg", title: "[Project title]", project: "project-1", x: 1880, y: 1420, width: 420 },

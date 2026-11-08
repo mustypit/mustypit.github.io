@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="project-page">
+<header class="p-header">
+  <a href="index.html" class="p-name" data-site="name"></a>
+  <a href="index.html">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg>
+    All work
+  </a>
+</header>
+
+<main class="bio">
+  <div class="bio-left" id="left"></div>
+  <div class="bio-right">
+    <div>
+      <h1 class="bio-name" data-site="name"></h1>
+      <span class="bio-tag" data-site="tagline"></span>
+    </div>
+    <div class="bio-text" id="text"></div>
+    <div class="bio-lists" id="lists"></div>
+    <div class="bio-contact" id="contact"></div>
+  </div>
+</main>
+
+<script src="content.js"></script>
+<script>
+(function () {
+  var SITE = window.SITE || {};
+  var bio = SITE.bio || {};
+  document.querySelectorAll('[data-site]').forEach(function (el) { el.textContent = SITE[el.getAttribute('data-site')] || ''; });
+  document.title = 'Bio' + (SITE.name ? ' · ' + SITE.name : '');
+
+  if (bio.portrait) {
+    var im = document.createElement('img');
+    im.className = 'bio-portrait'; im.src = bio.portrait; im.alt = SITE.name || '';
+    document.getElementById('left').appendChild(im);
+  }
+  (bio.text || []).forEach(function (t) {
+    var p = document.createElement('p'); p.textContent = t;
+    document.getElementById('text').appendChild(p);
+  });
+  (bio.lists || []).forEach(function (l) {
+    if (!l.items || !l.items.length) return;
+    var s = document.createElement('section');
+    var h = document.createElement('h2'); h.textContent = l.title || ''; s.appendChild(h);
+    var ul = document.createElement('ul');
+    l.items.forEach(function (it) { var li = document.createElement('li'); li.textContent = it; ul.appendChild(li); });
+    s.appendChild(ul);
+    document.getElementById('lists').appendChild(s);
+  });
+  var contact = document.getElementById('contact');
+  if (SITE.email) { var a = document.createElement('a'); a.href = 'mailto:' + SITE.email; a.textContent = SITE.email; contact.appendChild(a); }
+  if (SITE.instagram) { var b = document.createElement('a'); b.href = SITE.instagram; b.target = '_blank'; b.rel = 'noopener'; b.textContent = 'Instagram'; contact.appendChild(b); }
+})();
+</script>
+</body>
+</html>

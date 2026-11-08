@@ -16,7 +16,8 @@ Everything you need to change is in **`content.js`**:
   - `project`: which project page it opens.
   - `x`, `y`: position on the canvas (5000 × 3600; the centre is x 2500, y 1800).
   - `width`: size in pixels. Height follows the photo's shape.
-- `projects`: the text, details and images for each project page.
+- `bio`: the portrait, text and lists on your bio page.
+- `projects`: the text, details, images and `category` for each project page.
 
 ## Adding photos
 
@@ -31,6 +32,7 @@ The site updates by itself within a minute or two.
 ## Files
 
 - `index.html`: the canvas gallery
+- `about.html`: the bio page (opens from your name)
 - `project.html`: the project page
 - `content.js`: your content
 - `css/style.css`: the look
