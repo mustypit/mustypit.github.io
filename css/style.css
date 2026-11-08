@@ -140,37 +140,6 @@ button { font: inherit; }
 .top-right .t.icon { min-width: 40px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; color: var(--ink); }
 .top-right [hidden] { display: none !important; }
 
-/* Index overlay */
-.index-panel {
-  position: fixed; inset: 0; z-index: 50;
-  background: rgba(244,244,242,0.97);
-  overflow: auto; padding: 24px 24px 80px;
-  opacity: 0; transition: opacity .35s ease;
-}
-.index-panel.open { opacity: 1; }
-.index-panel[hidden] { display: none; }
-.ix-top { display: flex; justify-content: space-between; align-items: center; }
-.ix-title { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; padding-left: 8px; color: var(--ink); }
-.ix-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 48px; padding: 72px 8px 0; max-width: 1200px; }
-.ix-col h2 { margin: 0 0 20px; font-size: 12px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
-.ix-col ol { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
-.ix-col a {
-  display: grid; grid-template-columns: 36px 1fr auto; gap: 12px; align-items: baseline;
-  padding: 10px 0; border-top: 1px solid rgba(107,15,26,0.15);
-  text-decoration: none; color: var(--ink); font-size: 20px; letter-spacing: -0.01em;
-}
-.ix-col li:last-child a { border-bottom: 1px solid rgba(107,15,26,0.15); }
-.ix-col a:hover .ix-t { text-decoration: underline; text-underline-offset: 4px; }
-.ix-n, .ix-y { font-size: 12px; letter-spacing: .08em; color: var(--muted); font-variant-numeric: tabular-nums; }
-.ix-preview {
-  position: fixed; left: 0; top: 0; width: 220px; height: auto;
-  pointer-events: none; opacity: 0; transition: opacity .2s ease;
-  box-shadow: 0 14px 28px rgba(0,0,0,0.16); z-index: 51;
-}
-.ix-preview.on { opacity: 1; }
-@media (hover: none) { .ix-preview { display: none; } }
-@media (prefers-reduced-motion: reduce) { .index-panel { transition: none; } }
-
 /* ---------- Project page ---------- */
 .viewer { padding: 8px 48px 0; }
 .stage { position: relative; height: min(78vh, 900px); }

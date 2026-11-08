@@ -326,7 +326,7 @@
   // Clicks: single click on a photo lifts it, double click opens, caption opens.
   document.addEventListener('click', function (e) {
     if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; return; }
-    if (e.target.closest('button') || e.target.closest('.top') || e.target.closest('.index-panel')) return;
+    if (e.target.closest('button') || e.target.closest('.top')) return;
     if (penOn) {
       e.preventDefault(); e.stopPropagation();
       var p = toWorld(e.clientX, e.clientY);
@@ -384,47 +384,6 @@
   // ---------- Contact ----------
   if (SITE.email) $('mail').href = 'mailto:' + SITE.email; else $('mail').hidden = true;
   if (SITE.instagram) { $('insta').href = SITE.instagram; $('insta').hidden = false; }
-
-  // ---------- Index ----------
-  var panel = $('indexPanel'), cols = $('ixCols'), prev = $('ixPreview');
-  (function buildIndex() {
-    var groups = {}, order = [];
-    Object.keys(SITE.projects || {}).forEach(function (k) {
-      var p = SITE.projects[k], c = p.category || 'Projects';
-      if (!groups[c]) { groups[c] = []; order.push(c); }
-      groups[c].push({ id: k, p: p });
-    });
-    order.forEach(function (c) {
-      var col = document.createElement('section');
-      col.className = 'ix-col';
-      var h = document.createElement('h2'); h.textContent = c; col.appendChild(h);
-      var ol = document.createElement('ol');
-      groups[c].forEach(function (it, n) {
-        var li = document.createElement('li');
-        var a = document.createElement('a');
-        a.href = 'project.html?p=' + encodeURIComponent(it.id);
-        a.innerHTML = '<span class="ix-n"></span><span class="ix-t"></span><span class="ix-y"></span>';
-        a.querySelector('.ix-n').textContent = String(n + 1).padStart(2, '0');
-        a.querySelector('.ix-t').textContent = it.p.title || '';
-        a.querySelector('.ix-y').textContent = it.p.year || '';
-        var img = (it.p.images || [])[0];
-        if (img) {
-          a.addEventListener('mouseenter', function () { prev.src = img; prev.classList.add('on'); });
-          a.addEventListener('mouseleave', function () { prev.classList.remove('on'); });
-        }
-        li.appendChild(a); ol.appendChild(li);
-      });
-      col.appendChild(ol); cols.appendChild(col);
-    });
-  })();
-  panel.addEventListener('mousemove', function (e) {
-    prev.style.transform = 'translate(' + (e.clientX + 24) + 'px,' + (e.clientY - 80) + 'px)';
-  });
-  function openIndex() { panel.hidden = false; requestAnimationFrame(function () { panel.classList.add('open'); }); $('closeIndex').focus(); }
-  function closeIndex() { panel.classList.remove('open'); prev.classList.remove('on'); setTimeout(function () { panel.hidden = true; }, 350); $('openIndex').focus(); }
-  $('openIndex').onclick = openIndex;
-  $('closeIndex').onclick = closeIndex;
-  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !panel.hidden) closeIndex(); });
 
   // ---------- Start ----------
   if (!restore()) {
