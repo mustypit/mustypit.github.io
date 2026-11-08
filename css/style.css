@@ -201,7 +201,7 @@ img.slide { width: auto; height: auto; object-fit: contain; user-select: none; -
 
 /* ---------- Bio page ---------- */
 /* Portrait + text as one block, centred on the page */
-.bio { display: grid; grid-template-columns: auto minmax(0, 580px); column-gap: 40px; justify-content: center; align-content: start; align-items: start; padding: 72px 48px 96px; }
+.bio { display: grid; grid-template-columns: auto minmax(0, 580px); column-gap: 40px; justify-content: center; align-content: start; align-items: start; padding: 120px 48px 96px; }
 .bio-left { display: flex; justify-content: flex-end; }
 .bio-portrait { width: 220px; max-width: 100%; height: auto; display: block; }
 .bio-right { display: flex; flex-direction: column; gap: 48px; max-width: 580px; }
