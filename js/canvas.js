@@ -357,10 +357,13 @@
   };
   function clearStamps(fade) {
     if (!stamps.length) return;
-    var done = function () { stamps = []; ink.innerHTML = ''; vp.classList.remove('clearing'); updateTools(); save(); };
+    var done = function () {
+      stamps = []; ink.innerHTML = ''; updateTools(); save();
+      requestAnimationFrame(function () { vp.classList.remove('clearing'); });
+    };
     if (fade && !reduce) { vp.classList.add('clearing'); setTimeout(done, 520); } else done();
   }
-  $('clear').onclick = function () { clearStamps(false); };
+  $('clear').onclick = function () { clearStamps(true); };
   var resetEnd = null;
   $('reset').onclick = function () {
     if (penOn) { penOn = false; updateTools(); }
