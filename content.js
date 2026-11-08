@@ -61,7 +61,6 @@ window.SITE = {
       year: "[2025]",
       location: "[City, Country]",
       client: "[Personal / Client name]",
-      camera: "[Camera, film or lens]",
       text: "[Two or three sentences about the project: where you shot it, why, and what you were looking for.]",
       images: ["images/04.jpg", "images/05.jpg", "images/06.jpg", "images/07.jpg"],
       video: ""   // optional: a YouTube or Vimeo embed link, e.g. "https://player.vimeo.com/video/123456"
@@ -72,7 +71,6 @@ window.SITE = {
       year: "[2025]",
       location: "[City, Country]",
       client: "[Personal / Client name]",
-      camera: "[Camera, film or lens]",
       text: "[Two or three sentences about the project: where you shot it, why, and what you were looking for.]",
       images: ["images/07.jpg", "images/08.jpg", "images/09.jpg", "images/10.jpg"],
       video: ""   // optional: a YouTube or Vimeo embed link, e.g. "https://player.vimeo.com/video/123456"
@@ -83,7 +81,6 @@ window.SITE = {
       year: "[2025]",
       location: "[City, Country]",
       client: "[Personal / Client name]",
-      camera: "[Camera, film or lens]",
       text: "[Two or three sentences about the project: where you shot it, why, and what you were looking for.]",
       images: ["images/10.jpg", "images/11.jpg", "images/12.jpg", "images/13.jpg"],
       video: ""   // optional: a YouTube or Vimeo embed link, e.g. "https://player.vimeo.com/video/123456"
@@ -94,7 +91,6 @@ window.SITE = {
       year: "[2025]",
       location: "[City, Country]",
       client: "[Personal / Client name]",
-      camera: "[Camera, film or lens]",
       text: "[Two or three sentences about the project: where you shot it, why, and what you were looking for.]",
       images: ["images/13.jpg", "images/14.jpg", "images/15.jpg", "images/16.jpg"],
       video: ""   // optional: a YouTube or Vimeo embed link, e.g. "https://player.vimeo.com/video/123456"
@@ -105,7 +101,6 @@ window.SITE = {
       year: "[2025]",
       location: "[City, Country]",
       client: "[Personal / Client name]",
-      camera: "[Camera, film or lens]",
       text: "[Two or three sentences about the project: where you shot it, why, and what you were looking for.]",
       images: ["images/16.jpg", "images/17.jpg", "images/18.jpg", "images/19.jpg"],
       video: ""   // optional: a YouTube or Vimeo embed link, e.g. "https://player.vimeo.com/video/123456"
@@ -116,7 +111,6 @@ window.SITE = {
       year: "[2025]",
       location: "[City, Country]",
       client: "[Personal / Client name]",
-      camera: "[Camera, film or lens]",
       text: "[Two or three sentences about the project: where you shot it, why, and what you were looking for.]",
       images: ["images/19.jpg", "images/20.jpg", "images/21.jpg", "images/22.jpg"],
       video: ""   // optional: a YouTube or Vimeo embed link, e.g. "https://player.vimeo.com/video/123456"

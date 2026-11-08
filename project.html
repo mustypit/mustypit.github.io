@@ -29,7 +29,6 @@
       <div><dt>Year</dt><dd id="year"></dd></div>
       <div><dt>Location</dt><dd id="location"></dd></div>
       <div><dt>Client</dt><dd id="client"></dd></div>
-      <div><dt>Camera</dt><dd id="camera"></dd></div>
     </dl>
   </div>
   <nav class="p-siblings" id="siblings" aria-label="Projects in this category"></nav>
@@ -84,7 +83,7 @@
       sib.appendChild(a);
     });
   } else { sib.hidden = true; }
-  ['title', 'text', 'year', 'location', 'client', 'camera'].forEach(function (k) { set(k, p[k]); });
+  ['title', 'text', 'year', 'location', 'client'].forEach(function (k) { set(k, p[k]); });
 
   // ----- One-at-a-time viewer -----
   var slides = (p.images || []).map(function (src) { return { type: 'img', src: src }; });
