@@ -363,6 +363,7 @@
   $('clear').onclick = function () { clearStamps(false); };
   var resetEnd = null;
   $('reset').onclick = function () {
+    if (penOn) { penOn = false; updateTools(); }
     clearStamps(true);
     var changed = tiles.filter(function (t) { return t.off.x || t.off.y || t.w !== t.origW; });
     var spread = changed.length > 1 ? Math.min(160, 25 * (changed.length - 1)) : 0;
