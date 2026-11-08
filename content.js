@@ -14,6 +14,9 @@
        width   → size in pixels (height follows the photo's shape)
      The order of the list is the order of the numbers (01, 02…).
    • projects: one entry per project page.
+       category → projects with the same category are browsed together:
+                  on a project page, Next/Previous move through all the
+                  projects in that category, picture by picture.
    Tip: export each photo twice as .jpg: ~1400px for "image" and
    ~4000px for "large". Leave "large" out if you don't need deep zoom.
    ============================================================ */
@@ -51,6 +54,7 @@ window.SITE = {
 
   projects: {
     "project-1": {
+      category: "[Category A]",
       title: "[Project title]",
       year: "[2025]",
       location: "[City, Country]",
@@ -61,6 +65,7 @@ window.SITE = {
       video: ""   // optional: a YouTube or Vimeo embed link, e.g. "https://player.vimeo.com/video/123456"
     },
     "project-2": {
+      category: "[Category B]",
       title: "[Project title]",
       year: "[2025]",
       location: "[City, Country]",
@@ -71,6 +76,7 @@ window.SITE = {
       video: ""   // optional: a YouTube or Vimeo embed link, e.g. "https://player.vimeo.com/video/123456"
     },
     "project-3": {
+      category: "[Category A]",
       title: "[Project title]",
       year: "[2025]",
       location: "[City, Country]",
@@ -81,6 +87,7 @@ window.SITE = {
       video: ""   // optional: a YouTube or Vimeo embed link, e.g. "https://player.vimeo.com/video/123456"
     },
     "project-4": {
+      category: "[Category B]",
       title: "[Project title]",
       year: "[2025]",
       location: "[City, Country]",
@@ -91,6 +98,7 @@ window.SITE = {
       video: ""   // optional: a YouTube or Vimeo embed link, e.g. "https://player.vimeo.com/video/123456"
     },
     "project-5": {
+      category: "[Category A]",
       title: "[Project title]",
       year: "[2025]",
       location: "[City, Country]",
@@ -101,6 +109,7 @@ window.SITE = {
       video: ""   // optional: a YouTube or Vimeo embed link, e.g. "https://player.vimeo.com/video/123456"
     },
     "project-6": {
+      category: "[Category B]",
       title: "[Project title]",
       year: "[2025]",
       location: "[City, Country]",

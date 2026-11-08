@@ -20,7 +20,7 @@
 
 <section class="p-intro">
   <div class="left">
-    <span class="p-num" id="num"></span>
+    <span class="p-num"><span id="cat"></span> <span id="num"></span></span>
     <h1 class="p-title" id="title"></h1>
   </div>
   <div class="right">
@@ -32,6 +32,7 @@
       <div><dt>Camera</dt><dd id="camera"></dd></div>
     </dl>
   </div>
+  <nav class="p-siblings" id="siblings" aria-label="Projects in this category"></nav>
 </section>
 
 <section class="viewer" aria-roledescription="carousel" aria-label="Project images">
@@ -60,14 +61,29 @@
 (function () {
   var SITE = window.SITE || { projects: {} };
   document.querySelectorAll('[data-site]').forEach(function (el) { el.textContent = SITE[el.getAttribute('data-site')] || ''; });
-  var ids = Object.keys(SITE.projects || {});
-  var id = new URLSearchParams(location.search).get('p');
-  if (ids.indexOf(id) < 0) id = ids[0];
+  var all = Object.keys(SITE.projects || {});
+  var q = new URLSearchParams(location.search);
+  var id = q.get('p');
+  if (all.indexOf(id) < 0) id = all[0];
   var p = (SITE.projects || {})[id] || {};
+  // Projects in the same category, in content.js order
+  var ids = all.filter(function (k) { return (SITE.projects[k].category || '') === (p.category || ''); });
   var i = ids.indexOf(id);
+  var link = function (k, at) { return 'project.html?p=' + encodeURIComponent(k) + (at ? '&i=' + at : ''); };
   document.title = (p.title || 'Project') + (SITE.name ? ' · ' + SITE.name : '');
   var set = function (k, v) { var el = document.getElementById(k); if (el) el.textContent = v || ''; };
-  set('num', String(i + 1).padStart(2, '0'));
+  set('cat', p.category ? p.category + ' ·' : '');
+  set('num', String(i + 1).padStart(2, '0') + ' / ' + String(ids.length).padStart(2, '0'));
+  var sib = document.getElementById('siblings');
+  if (ids.length > 1) {
+    ids.forEach(function (k, n) {
+      var a = document.createElement('a');
+      a.href = link(k);
+      a.textContent = String(n + 1).padStart(2, '0') + ' ' + (SITE.projects[k].title || '');
+      if (k === id) { a.setAttribute('aria-current', 'page'); }
+      sib.appendChild(a);
+    });
+  } else { sib.hidden = true; }
   ['title', 'text', 'year', 'location', 'client', 'camera'].forEach(function (k) { set(k, p[k]); });
 
   // ----- One-at-a-time viewer -----
@@ -90,9 +106,14 @@
     stage.insertBefore(el, document.getElementById('zPrev'));
     return el;
   });
+  var prevId = ids[(i - 1 + ids.length) % ids.length], nextId = ids[(i + 1) % ids.length];
+  var multi = ids.length > 1;
+  var start = q.get('i') === 'last' ? els.length - 1 : 0;
   var cur = 0;
   function show(n) {
     if (!els.length) { document.querySelector('.viewer').hidden = true; return; }
+    if (multi && n >= els.length) { location.href = link(nextId); return; }
+    if (multi && n < 0) { location.href = link(prevId, 'last'); return; }
     cur = (n + els.length) % els.length;
     els.forEach(function (el, k) {
       var on = k === cur;
@@ -102,7 +123,7 @@
     });
     var two = function (x) { return String(x).padStart(2, '0'); };
     document.getElementById('count').textContent = two(cur + 1) + ' / ' + two(els.length);
-    var single = els.length < 2;
+    var single = els.length < 2 && !multi;
     var isVideo = slides[cur].type === 'video';
     ['bPrev', 'bNext'].forEach(function (id) { document.getElementById(id).hidden = single; });
     ['zPrev', 'zNext'].forEach(function (id) { document.getElementById(id).hidden = single || isVideo; });
@@ -120,10 +141,10 @@
     var dx = e.changedTouches[0].clientX - sx; sx = null;
     if (Math.abs(dx) > 40) show(cur + (dx < 0 ? 1 : -1));
   });
-  show(0);
+  show(start);
 
   if (ids.length > 1) {
-    var prev = ids[(i - 1 + ids.length) % ids.length], next = ids[(i + 1) % ids.length];
+    var prev = prevId, next = nextId;
     var pa = document.getElementById('prev'), na = document.getElementById('next');
     pa.href = 'project.html?p=' + encodeURIComponent(prev);
     pa.textContent = '← Previous: ' + (SITE.projects[prev].title || '');

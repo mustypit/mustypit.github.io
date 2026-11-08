@@ -167,6 +167,10 @@ img.slide { width: auto; height: auto; object-fit: contain; user-select: none; -
 .p-intro .left { grid-column: 1 / span 6; display: flex; flex-direction: column; gap: 16px; }
 .p-intro .right { grid-column: 8 / span 5; display: flex; flex-direction: column; gap: 32px; padding-top: 34px; }
 .p-num { font-size: 13px; color: var(--muted); }
+.p-siblings { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 4px 20px; padding-top: 40px; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
+.p-siblings a { text-decoration: none; color: var(--muted); min-height: 32px; display: inline-flex; align-items: center; }
+.p-siblings a:hover, .p-siblings a[aria-current] { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
+.p-siblings[hidden] { display: none; }
 .p-title { margin: 0; font-size: 56px; line-height: 1.05; font-weight: 500; letter-spacing: -.02em; }
 .p-text { margin: 0; font-size: 17px; line-height: 1.6; }
 .p-meta { margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 24px; font-size: 13px; }
