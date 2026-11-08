@@ -1,7 +1,8 @@
 /* ============================================================
    YOUR CONTENT — this is the only file you need to edit.
    ============================================================
-   • name / tagline / email: shown on the site.
+   • name / tagline / email / instagram: shown on the site
+     (email and instagram appear as icons in the top-right corner).
    • photos: every picture on the canvas.
        image   → the file in the "images" folder (about 1200–1600px,
                  loads first so the page is fast)
@@ -25,6 +26,7 @@ window.SITE = {
   name: "[YOUR NAME]",
   tagline: "Photography & film",
   email: "you@example.com",
+  instagram: "",   // optional, e.g. "https://instagram.com/yourname" — shows an icon when filled in
 
   photos: [
     { image: "images/01.jpg", large: "images/large/01.jpg", title: "[Project title]", project: "project-1", x: 1880, y: 1420, width: 420 },

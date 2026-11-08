@@ -21,6 +21,15 @@
 
   <header class="top">
     <span class="name-pill" data-site="name"></span>
+    <span class="top-right">
+      <button type="button" class="t" id="openIndex" aria-haspopup="dialog">Index</button>
+      <a class="t icon" id="mail" href="#" aria-label="Email" title="Email">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5.5" width="18" height="13" rx="1"></rect><path d="M3.5 6.5l8.5 6.5 8.5-6.5"></path></svg>
+      </a>
+      <a class="t icon" id="insta" href="#" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram" hidden>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.2" cy="6.8" r="0.9" fill="currentColor" stroke="none"></circle></svg>
+      </a>
+    </span>
   </header>
 
   <nav class="toolbar" aria-label="Canvas tools">
@@ -37,6 +46,15 @@
     </button>
     <button type="button" class="t" id="clear" hidden>Clear</button>
   </nav>
+</div>
+
+<div class="index-panel" id="indexPanel" role="dialog" aria-modal="true" aria-label="Index" hidden>
+  <div class="ix-top">
+    <span class="ix-title">Index</span>
+    <button type="button" class="t" id="closeIndex">Close</button>
+  </div>
+  <div class="ix-cols" id="ixCols"></div>
+  <img class="ix-preview" id="ixPreview" alt="" aria-hidden="true">
 </div>
 
 <script src="content.js"></script>
