@@ -52,7 +52,7 @@
     a.appendChild(ph);
     a.appendChild(cap);
     world.insertBefore(a, ink);
-    tiles.push({ el: a, ph: ph, cap: cap, origW: p.width, off: { x: 0, y: 0 }, w: p.width });
+    tiles.push({ el: a, ph: ph, cap: cap, img: img, large: p.large || '', hi: false, origW: p.width, off: { x: 0, y: 0 }, w: p.width });
   });
 
   // ---------- View (pan / zoom) ----------
@@ -63,6 +63,7 @@
   function apply(nv) {
     v = nv;
     world.style.transform = 'translate(' + v.tx + 'px,' + v.ty + 'px) scale(' + v.s + ')';
+    scheduleUpgrade();
     $('zoomLabel').textContent = (v.s >= 0.1 ? Math.round(v.s * 100) : v.s >= 0.01 ? (v.s * 100).toFixed(1) : (v.s * 100).toFixed(2)) + '%';
     save();
   }
@@ -132,6 +133,29 @@
       t.el.style.cursor = cur;
       t.cap.style.cursor = cur;
       t.ph.querySelectorAll('.grip').forEach(function (g) { g.style.cursor = cur; });
+    });
+  }
+
+  // Sharper photos when zoomed in: swap to the "large" file for visible photos
+  var upTimer = null;
+  function scheduleUpgrade() { clearTimeout(upTimer); upTimer = setTimeout(upgrade, 180); }
+  function upgrade() {
+    var dpr = window.devicePixelRatio || 1;
+    var vw = window.innerWidth, vh = window.innerHeight;
+    tiles.forEach(function (t) {
+      if (!t.large || t.hi || t.loading) return;
+      var nat = t.img.naturalWidth;
+      if (!nat) return;
+      var shown = t.w * v.s * dpr;
+      if (shown < nat * 0.9) return;
+      var r = t.ph.getBoundingClientRect();
+      if (r.right < -200 || r.bottom < -200 || r.left > vw + 200 || r.top > vh + 200) return;
+      t.loading = true;
+      var big = new Image();
+      big.decoding = 'async';
+      big.onload = function () { t.img.src = t.large; t.hi = true; t.loading = false; };
+      big.onerror = function () { t.loading = false; t.large = ''; };
+      big.src = t.large;
     });
   }
 

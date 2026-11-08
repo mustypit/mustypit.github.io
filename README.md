@@ -11,6 +11,7 @@ Everything you need to change is in **`content.js`**:
 - `name`, `tagline`, `email`: your details.
 - `photos`: one line per photo on the canvas.
   - `image`: the file in the `images` folder.
+  - `large`: optional sharper version in `images/large`, used when zoomed in.
   - `title`: caption under the photo.
   - `project`: which project page it opens.
   - `x`, `y`: position on the canvas (5000 × 3600; the centre is x 2500, y 1800).
@@ -19,9 +20,11 @@ Everything you need to change is in **`content.js`**:
 
 ## Adding photos
 
-1. Export them as `.jpg`, about 2000px on the long side.
-2. Upload them to the `images` folder on GitHub (Add file → Upload files).
-3. Add or change the matching line in `content.js` and commit.
+1. Export each photo as `.jpg` twice: about 1400px on the long side for `images/`, and about 4000px for `images/large/`, using the same file name.
+2. Upload them to those folders on GitHub (Add file → Upload files).
+3. Add or change the matching line in `content.js` (`image` and `large`) and commit.
+
+The small file loads first so the page is quick, and the large one is swapped in automatically when a visitor zooms in close. If you don't need deep zoom for a photo, leave out its `large` line.
 
 The site updates by itself within a minute or two.
 

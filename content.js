@@ -3,7 +3,10 @@
    ============================================================
    • name / tagline / email: shown on the site.
    • photos: every picture on the canvas.
-       image   → the file in the "images" folder
+       image   → the file in the "images" folder (about 1200–1600px,
+                 loads first so the page is fast)
+       large   → optional big version in "images/large" (about 4000px);
+                 swapped in automatically when someone zooms in close
        title   → caption under the photo
        project → which project page it opens (see "projects" below)
        x, y    → position on the canvas (the canvas is 5000 × 3600;
@@ -11,7 +14,8 @@
        width   → size in pixels (height follows the photo's shape)
      The order of the list is the order of the numbers (01, 02…).
    • projects: one entry per project page.
-   Tip: export photos about 2000px on the long side, as .jpg.
+   Tip: export each photo twice as .jpg: ~1400px for "image" and
+   ~4000px for "large". Leave "large" out if you don't need deep zoom.
    ============================================================ */
 
 window.SITE = {
@@ -20,29 +24,29 @@ window.SITE = {
   email: "you@example.com",
 
   photos: [
-    { image: "images/01.jpg", title: "[Project title]", project: "project-1", x: 1880, y: 1420, width: 420 },
-    { image: "images/02.jpg", title: "[Project title]", project: "project-2", x: 2760, y: 1380, width: 300 },
-    { image: "images/03.jpg", title: "[Project title]", project: "project-3", x: 2000, y: 1900, width: 280 },
-    { image: "images/04.jpg", title: "[Project title]", project: "project-4", x: 2700, y: 1960, width: 480 },
-    { image: "images/05.jpg", title: "[Project title]", project: "project-5", x: 1200, y: 1000, width: 360 },
-    { image: "images/06.jpg", title: "[Project title]", project: "project-6", x: 2200, y: 950, width: 460 },
-    { image: "images/07.jpg", title: "[Project title]", project: "project-1", x: 3300, y: 1050, width: 380 },
-    { image: "images/08.jpg", title: "[Project title]", project: "project-2", x: 3500, y: 1700, width: 420 },
-    { image: "images/09.jpg", title: "[Project title]", project: "project-3", x: 1150, y: 1750, width: 480 },
-    { image: "images/10.jpg", title: "[Project title]", project: "project-4", x: 1500, y: 2250, width: 340 },
-    { image: "images/11.jpg", title: "[Project title]", project: "project-5", x: 2350, y: 2350, width: 520 },
-    { image: "images/12.jpg", title: "[Project title]", project: "project-6", x: 3200, y: 2300, width: 300 },
-    { image: "images/13.jpg", title: "[Project title]", project: "project-1", x: 200, y: 200, width: 600 },
-    { image: "images/14.jpg", title: "[Project title]", project: "project-2", x: 1900, y: 250, width: 420 },
-    { image: "images/15.jpg", title: "[Project title]", project: "project-3", x: 3000, y: 200, width: 500 },
-    { image: "images/16.jpg", title: "[Project title]", project: "project-4", x: 4200, y: 300, width: 440 },
-    { image: "images/17.jpg", title: "[Project title]", project: "project-5", x: 250, y: 1300, width: 420 },
-    { image: "images/18.jpg", title: "[Project title]", project: "project-6", x: 4250, y: 1400, width: 520 },
-    { image: "images/19.jpg", title: "[Project title]", project: "project-1", x: 300, y: 2400, width: 500 },
-    { image: "images/20.jpg", title: "[Project title]", project: "project-2", x: 1100, y: 3000, width: 600 },
-    { image: "images/21.jpg", title: "[Project title]", project: "project-3", x: 2600, y: 3000, width: 420 },
-    { image: "images/22.jpg", title: "[Project title]", project: "project-4", x: 3600, y: 2950, width: 380 },
-    { image: "images/23.jpg", title: "[Project title]", project: "project-5", x: 4300, y: 2400, width: 520 },
+    { image: "images/01.jpg", large: "images/large/01.jpg", title: "[Project title]", project: "project-1", x: 1880, y: 1420, width: 420 },
+    { image: "images/02.jpg", large: "images/large/02.jpg", title: "[Project title]", project: "project-2", x: 2760, y: 1380, width: 300 },
+    { image: "images/03.jpg", large: "images/large/03.jpg", title: "[Project title]", project: "project-3", x: 2000, y: 1900, width: 280 },
+    { image: "images/04.jpg", large: "images/large/04.jpg", title: "[Project title]", project: "project-4", x: 2700, y: 1960, width: 480 },
+    { image: "images/05.jpg", large: "images/large/05.jpg", title: "[Project title]", project: "project-5", x: 1200, y: 1000, width: 360 },
+    { image: "images/06.jpg", large: "images/large/06.jpg", title: "[Project title]", project: "project-6", x: 2200, y: 950, width: 460 },
+    { image: "images/07.jpg", large: "images/large/07.jpg", title: "[Project title]", project: "project-1", x: 3300, y: 1050, width: 380 },
+    { image: "images/08.jpg", large: "images/large/08.jpg", title: "[Project title]", project: "project-2", x: 3500, y: 1700, width: 420 },
+    { image: "images/09.jpg", large: "images/large/09.jpg", title: "[Project title]", project: "project-3", x: 1150, y: 1750, width: 480 },
+    { image: "images/10.jpg", large: "images/large/10.jpg", title: "[Project title]", project: "project-4", x: 1500, y: 2250, width: 340 },
+    { image: "images/11.jpg", large: "images/large/11.jpg", title: "[Project title]", project: "project-5", x: 2350, y: 2350, width: 520 },
+    { image: "images/12.jpg", large: "images/large/12.jpg", title: "[Project title]", project: "project-6", x: 3200, y: 2300, width: 300 },
+    { image: "images/13.jpg", large: "images/large/13.jpg", title: "[Project title]", project: "project-1", x: 200, y: 200, width: 600 },
+    { image: "images/14.jpg", large: "images/large/14.jpg", title: "[Project title]", project: "project-2", x: 1900, y: 250, width: 420 },
+    { image: "images/15.jpg", large: "images/large/15.jpg", title: "[Project title]", project: "project-3", x: 3000, y: 200, width: 500 },
+    { image: "images/16.jpg", large: "images/large/16.jpg", title: "[Project title]", project: "project-4", x: 4200, y: 300, width: 440 },
+    { image: "images/17.jpg", large: "images/large/17.jpg", title: "[Project title]", project: "project-5", x: 250, y: 1300, width: 420 },
+    { image: "images/18.jpg", large: "images/large/18.jpg", title: "[Project title]", project: "project-6", x: 4250, y: 1400, width: 520 },
+    { image: "images/19.jpg", large: "images/large/19.jpg", title: "[Project title]", project: "project-1", x: 300, y: 2400, width: 500 },
+    { image: "images/20.jpg", large: "images/large/20.jpg", title: "[Project title]", project: "project-2", x: 1100, y: 3000, width: 600 },
+    { image: "images/21.jpg", large: "images/large/21.jpg", title: "[Project title]", project: "project-3", x: 2600, y: 3000, width: 420 },
+    { image: "images/22.jpg", large: "images/large/22.jpg", title: "[Project title]", project: "project-4", x: 3600, y: 2950, width: 380 },
+    { image: "images/23.jpg", large: "images/large/23.jpg", title: "[Project title]", project: "project-5", x: 4300, y: 2400, width: 520 },
   ],
 
   projects: {
