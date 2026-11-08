@@ -200,8 +200,8 @@ img.slide { width: auto; height: auto; object-fit: contain; user-select: none; -
 }
 
 /* ---------- Bio page ---------- */
-/* Split at the centre: portrait ends at the centre line, text starts there */
-.bio { display: grid; grid-template-columns: 1fr 1fr; column-gap: 40px; padding: 96px 48px 120px; align-items: start; }
+/* Portrait + text as one block, centred on the page */
+.bio { display: grid; grid-template-columns: auto minmax(0, 580px); column-gap: 40px; justify-content: center; align-content: center; align-items: start; min-height: calc(100vh - 72px); padding: 64px 48px 96px; }
 .bio-left { display: flex; justify-content: flex-end; }
 .bio-portrait { width: 220px; max-width: 100%; height: auto; display: block; }
 .bio-right { display: flex; flex-direction: column; gap: 48px; max-width: 580px; }
@@ -215,7 +215,7 @@ img.slide { width: auto; height: auto; object-fit: contain; user-select: none; -
 .bio-contact { display: flex; flex-wrap: wrap; gap: 8px 28px; font-size: 15px; }
 .bio-contact a { text-underline-offset: 4px; }
 @media (max-width: 760px) {
-  .bio { grid-template-columns: 1fr; row-gap: 32px; padding: 48px 20px 80px; }
+  .bio { grid-template-columns: 1fr; row-gap: 32px; padding: 48px 20px 80px; min-height: 0; align-content: start; }
   .bio-left { justify-content: flex-start; }
   .bio-portrait { width: 140px; }
   .bio-name { font-size: 40px; }
