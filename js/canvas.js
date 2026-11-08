@@ -123,7 +123,7 @@
   function updateTools() {
     var icon = ICONS[shape] || ICONS.star;
     $('stampIcon').setAttribute('d', icon);
-    $('stampIcon').setAttribute('fill', penOn ? '#111111' : 'none');
+    $('stampIcon').setAttribute('fill', penOn ? '#6B0F1A' : 'none');
     $('stamp').setAttribute('aria-pressed', penOn ? 'true' : 'false');
     $('clear').hidden = stamps.length === 0;
     vp.classList.toggle('pen-on', penOn);
